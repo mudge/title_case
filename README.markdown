@@ -11,12 +11,12 @@ Usage
 Inside a Ruby script or an `irb` session:
 
     require 'titlecase'
-    "Hello there".titlecase
+    "Hello there".title_case
     
 From the command-line:
 
     ruby titlecase.rb "Hello there"
-    
+
 More Information
 ----------------
 
