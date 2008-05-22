@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'test/unit'
-require 'titlecase'
+require 'title_case'
 
 class TitleCaseTest < Test::Unit::TestCase
   def test_qa_with_steve_jobs

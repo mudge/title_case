@@ -10,14 +10,19 @@ Usage
 
 Inside a Ruby script or an `irb` session:
 
-    require 'titlecase'
+    require 'title_case'
     "Hello there".title_case
     
 From the command-line:
 
-    ruby titlecase.rb "Hello there"
+    ruby title_case.rb "Hello there"
 
-More Information
-----------------
+Caveats
+-------
 
-See http://mucur.name/posts/ruby-title-case
+It will not properly handle non-ASCII printable characters such as é.
+
+While it will deal with most common usage where you need a reasonably-correctly-cased sentence to be made suitable for a title, it will not correct mistakes such as lowercase acronyms or errant capital letters:
+
+    "at&t"  => "At&t"
+    "HellO" => "HellO"
