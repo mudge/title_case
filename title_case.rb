@@ -83,6 +83,8 @@ if $0 == __FILE__
   input = ARGV.first || STDIN.read
   
   if input.empty?
+    
+    # If no input was given, print simple usage instructions
     puts "usage: ruby title_case.rb [TEXT_TO_TITLE_CASE]"
   else
     puts input.title_case

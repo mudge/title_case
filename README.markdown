@@ -21,7 +21,7 @@ From the command-line:
 Known Issues
 ------------
 
-It will not properly handle non-ASCII printable characters such as é.
+Unlike the original Perl implementation, this version does not correctly capitalise characters such as é and is therefore limited in scope to strings consisting only of [ASCII](http://en.wikipedia.org/wiki/Ascii) printable characters. A workaround would be to stop relying on the Ruby regular expression patterns of `[A-Z]`, `\w` and `\W` for detecting capital letters, alphanumeric characters and non-alphanumeric characters respectively.
 
 While it will deal with most common usage where you need a reasonably-correctly-cased sentence to be made suitable for a title, it will not correct mistakes such as lowercase acronyms or errant capital letters:
 
