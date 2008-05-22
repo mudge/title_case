@@ -16,9 +16,10 @@ Inside a Ruby script or an `irb` session:
 From the command-line:
 
     ruby title_case.rb "Hello there"
+    echo "An amazing headline" | ruby title_case.rb
 
-Caveats
--------
+Known Issues
+------------
 
 It will not properly handle non-ASCII printable characters such as é.
 
