@@ -20,14 +20,19 @@
 
 class String
 
+  # A regular expression to match small words that should not be
+  # titleized.
   SMALL_WORDS_RE = /^(a|an|and|as|at|but|by|en|for|if|in|of|on|or|the|to|v\.?|via|vs\.?)$/
   
   def titleize_if_appropriate
 
-    # If a word contains a full-stop within itself or if it has
-    # a capital letter that is not its first letter, leave it alone.
+    # If a word does not contain a full-stop within itself and it doesn't
+    # contain any capital letters apart from its first letter, titleize it.
     if !self[/\w\.\w/] && !self[/^.+[A-Z]/]
-      self[/^\W*(\w)/] = self[/^\W*(\w)/].upcase
+      
+      # Capitalise the first *word* character (therefore avoiding problems
+      # where the first character is some punctuation).
+      self[/^\W*\w/] = self[/^\W*\w/].upcase
     end
     self
   end
@@ -36,17 +41,28 @@ class String
 
     # Keep track when a colon has been used at the end of a word.
     colon_preceding = false
-
+    
+    # Split the string by any whitespace and then inspect each word
+    # at a time.
     words = split(/\s+/).map do |word|
       title_cased_word = if colon_preceding
+        
+        # If there was a colon preceding this word then titleize
+        # it even if it is a small word.
         colon_preceding = false
         word.titleize_if_appropriate
       elsif word.downcase[SMALL_WORDS_RE]
+        
+        # If this is a small word, make it lowercase.
         word.downcase
       else
+        
+        # In all other cases, titleize the word.
         word.titleize_if_appropriate
       end
 
+      # If this word ends in a colon, set the flag so that the
+      # following word can be titleized.
       colon_preceding = true if word[/:$/]
 
       title_cased_word
@@ -61,7 +77,11 @@ class String
 end
 
 if $0 == __FILE__
+  
+  # If this file is being executed, read in from the command line
+  # and STDIN.
   input = ARGV.first || STDIN.read
+  
   if input.empty?
     puts "usage: ruby title_case.rb [TEXT_TO_TITLE_CASE]"
   else
