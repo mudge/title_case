@@ -8,12 +8,17 @@ This is a Ruby implementation of [John Gruber's Title Case][gruber] by Paul Mucu
 Usage
 -----
 
-Inside a Ruby script or an `irb` session:
+Simply `include` the `TitleCase` module into your string class. For example, inside a Ruby script or an `irb` session:
 
     require 'title_case'
+    
+    class String
+      include TitleCase
+    end
+    
     "Hello there".title_case
     
-From the command-line:
+Alternatively, it can be used from the command-line:
 
     ruby title_case.rb "Hello there"
     echo "An amazing headline" | ruby title_case.rb
