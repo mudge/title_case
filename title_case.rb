@@ -18,7 +18,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-class String
+module TitleCase
 
   # A regular expression to match small words that should not be
   # titleized.
@@ -87,6 +87,11 @@ if $0 == __FILE__
     # If no input was given, print simple usage instructions
     puts "usage: ruby title_case.rb [TEXT_TO_TITLE_CASE]"
   else
+    
+    class String
+      include TitleCase
+    end
+  
     puts input.title_case
   end
 end

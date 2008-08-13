@@ -2,6 +2,10 @@
 require 'test/unit'
 require 'title_case'
 
+class String
+  include TitleCase
+end
+
 class TitleCaseTest < Test::Unit::TestCase
   def test_qa_with_steve_jobs
     assert_equal "Q&A With Steve Jobs: 'That's What Happens in Technology'", 
@@ -93,5 +97,37 @@ class TitleCaseTest < Test::Unit::TestCase
   
   def test_url_at_end
     assert_equal "I Like google.com", "I Like google.com".title_case
+  end
+  
+  def test_step_by_step
+    assert_equal "For Step-by-Step Directions Email someone@gmail.com", "For Step-by-Step Directions Email someone@gmail.com".title_case
+  end
+  
+  def test_lottery
+    assert_equal "Have You Read \"The Lottery\"?", "Have You Read \"The Lottery\"?".title_case
+  end
+  
+  def test_haircut
+    assert_equal "Your Hair[cut] Looks (Nice)", "Your Hair[cut] Looks (Nice)".title_case
+  end
+  
+  def test_people_probably
+    assert_equal "People Probably Won't Put http://foo.com/bar/ in Titles", "People Probably Won't Put http://foo.com/bar/ in Titles".title_case
+  end
+  
+  def test_scott_moritz
+    assert_equal "Scott Moritz and TheStreet.com’s Million iPhone La‑La Land", "Scott Moritz and TheStreet.com’s Million iPhone La‑La Land".title_case
+  end
+  
+  def test_blackberry
+    assert_equal "BlackBerry vs. iPhone", "BlackBerry vs. iPhone".title_case
+  end
+  
+  def test_notes
+    assert_equal "Notes and Observations Regarding Apple’s Announcements From ‘The Beat Goes On’ Special Event", "Notes and Observations Regarding Apple’s Announcements From ‘The Beat Goes On’ Special Event".title_case
+  end
+  
+  def test_read_markdown
+    assert_equal "Read markdown_rules.txt to Find Out How _Underscores Around Words_ Will Be Interpretted", "Read markdown_rules.txt to Find Out How _Underscores Around Words_ Will Be Interpretted".title_case
   end
 end
