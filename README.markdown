@@ -4,24 +4,36 @@ Ruby Title Case
 This is a Ruby implementation of [John Gruber's Title Case][gruber] by Paul Mucur.
 
   [gruber]: http://daringfireball.net/2008/05/title_case
-  
+
 Usage
 -----
 
-Simply `include` the `TitleCase` module into your string class. For example, inside a Ruby script or an `irb` session:
+Simply `extend` any string you wish to apply title casing to and then use the
+`title_case` method. For example, inside a Ruby script or an `irb` session:
 
-    require 'title_case'
-    
-    class String
-      include TitleCase
-    end
-    
-    "Hello there".title_case
-    
+```ruby
+require 'title_case'
+
+greeting = "Hello there"
+greeting.extend(TitleCase)
+greeting.title_case
+```
+
 Alternatively, it can be used from the command-line:
 
-    ruby title_case.rb "Hello there"
-    echo "An amazing headline" | ruby title_case.rb
+```console
+$ ruby title_case.rb "Hello there"
+$ echo "An amazing headline" | ruby title_case.rb
+```
+
+If you wish to make the `title_case` method available to all strings then you
+can re-open the `String` class like so:
+
+```ruby
+class String
+  include TitleCase
+end
+```
 
 Known Issues
 ------------
