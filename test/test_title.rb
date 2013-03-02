@@ -1,28 +1,11 @@
 # encoding: UTF-8
 require 'test/unit'
-require 'title_case'
+require 'title'
 
-# In order to test mixing directly into the String class, create a separate
-# String class to keep from interfering with other tests.
-class TitleCaseString < String
-  include TitleCase
-end
-
-class TitleCaseTest < Test::Unit::TestCase
+class TitleTest < Test::Unit::TestCase
   def assert_title_case(expected, actual)
-
-    # Test that it works when mixing into the whole String class.
-    title_case_string = TitleCaseString.new(actual)
-    assert_equal expected, title_case_string.title_case
-
-    # Test that it works when extending a single instance.
-    actual.extend(TitleCase)
-    assert_equal expected, actual.title_case
-  end
-
-  def test_string_is_not_polluted
-    assert !String.new.respond_to?(:title_case),
-        "Strings should not have a title_case method by default."
+    title = Title.new(actual)
+    assert_equal(expected, title.to_title_case)
   end
 
   def test_qa_with_steve_jobs

@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 # Ruby Title Case
 # A Ruby implementation of John Gruber's Title Case
 # http://daringfireball.net/2008/05/title_case
@@ -18,27 +16,15 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-module TitleCase
+require "delegate"
+
+class Title < SimpleDelegator
 
   # A regular expression to match small words that should not be
   # titleized.
   SMALL_WORDS_RE = /^(a|an|and|as|at|but|by|en|for|if|in|of|on|or|the|to|v\.?|via|vs\.?)$/
 
-  def titleize_if_appropriate(word)
-
-    # If a word does not contain a full-stop within itself and it doesn't
-    # contain any capital letters apart from its first letter, titleize it.
-    if !word[/\w\.\w/] && !word[/^.+[A-Z]/]
-
-      # Capitalise the first *word* character (therefore avoiding problems
-      # where the first character is some punctuation).
-      word[/^\W*\w/] = word[/^\W*\w/].upcase
-    end
-
-    word
-  end
-
-  def title_case
+  def to_title_case
 
     # Keep track when a colon has been used at the end of a word.
     colon_preceding = false
@@ -75,24 +61,21 @@ module TitleCase
 
     words.join(" ")
   end
-end
 
-if $0 == __FILE__
+  private
 
-  # If this file is being executed, read in from the command line
-  # and STDIN.
-  input = ARGV.first || STDIN.read
+  def titleize_if_appropriate(word)
 
-  # ARGV.first is frozen and so cannot be extended by default.
-  input = input.dup if input.frozen?
+    # If a word does not contain a full-stop within itself and it doesn't
+    # contain any capital letters apart from its first letter, titleize it.
+    if !word[/\w\.\w/] && !word[/^.+[A-Z]/]
 
-  if input.empty?
+      # Capitalise the first *word* character (therefore avoiding problems
+      # where the first character is some punctuation).
+      word[/^\W*\w/] = word[/^\W*\w/].upcase
+    end
 
-    # If no input was given, print simple usage instructions
-    puts "usage: ruby title_case.rb [TEXT_TO_TITLE_CASE]"
-  else
-    input.extend(TitleCase)
-
-    puts input.title_case
+    word
   end
 end
+
