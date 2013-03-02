@@ -1,8 +1,6 @@
-#!/usr/bin/env ruby
 # encoding: UTF-8
-
 require 'test/unit'
-require './title_case'
+require 'title_case'
 
 # In order to test mixing directly into the String class, create a separate
 # String class to keep from interfering with other tests.
